@@ -223,7 +223,7 @@ $linesInFile = count(file($file));
 //$openFile = fopen($file , 'r');
 for($i=1; $i <= $linesInFile; $i++)
 {
-			$lines = file($file);
+	$lines = file($file);
 }
 
 
@@ -245,17 +245,17 @@ if (isset($_SESSION['sess_username']))
 	echo 'Select Database <select name="database">';
 	if ($_SESSION['sess_user_id'] == 0) //super admin, can see all databases
 	{
-		for($i=0; $i <= ($linesInFile - 1); $i++)
+		for($i=0; $i < $linesInFile; $i++)
 		{
-			echo "<option value=$lines[$i]>$lines[$i]</option>";
+			echo "<option value='" . $lines[$i]  . "'>$lines[$i]</option>";
 		}
-
+		
 
 	}
 	else if ($_SESSION['sess_user_id'] == 1) //pretty princess database
 	{
 
-			echo "<option value=$lines[1]>$lines[1]</option>";
+			echo "<option value='" . $lines[2]  . "'>$lines[2]</option>";
 
 
 	}

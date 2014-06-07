@@ -40,7 +40,7 @@
 	 	   	}
 	 	   	else
 	    	{
-	    		echo "Failed to update $nameString vv||| $fullID <br />";
+	    		echo "Failed to update $nameString ||| $fullID <br />";
 	 	   	}
 		}
 	    else

@@ -26,7 +26,7 @@ if (strlen($url) > 21)
 }
 
 $team = $_POST['team'];
-$database = $_POST['database'];
+$database = trim($_POST['database']);
 $league = $_POST['league'];
 
 
