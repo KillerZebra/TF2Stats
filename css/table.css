@@ -1,12 +1,4 @@
-table
-{
-	margin-top: 60px;
-}
 
-table, th, td
-{
-	padding: 5px;
-}
 
 #stats
 {
@@ -35,8 +27,8 @@ table, th, td
 	border-radius: 20px;
 	margin: auto;
 	position:fixed;
-	top:5px;
-	right:150px;
+	top:15px;
+	right: 10%;
 	box-shadow: 10px 10px 5px #888888;
 	text-align: center;
 	text-decoration: none;
@@ -47,14 +39,10 @@ table, th, td
 #tableLabel
 {
 	position: fixed; 
+	top: 70px;
 	left: 50%;
-	margin-left: -100px;
 	text-align: center;
 	
 }
 
 
-table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):after 
-{ 
-    content: " \25B4\25BE" 
-}

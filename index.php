@@ -2,11 +2,21 @@
 <head>
 <title> Stat </title>
 	<link rel="stylesheet" type="text/css" href="css/table.css">
-	<script type="text/javascript" src="js/sorttable.js"></script> 
-
+	<link media="print, projection, screen" type="text/css" href="/TF2Stats/js/tablesorter/themes/blue/style.css" rel="stylesheet">
+	<script type="text/javascript" src="/TF2Stats/js/tablesorter/jquery-latest.js"></script> 
+	<script type="text/javascript" src="/TF2Stats/js/tablesorter/jquery.tablesorter.js"></script> 
+	<script>
+	$(document).ready(function() 
+		{ 
+        $("#statsTable").tablesorter(); 
+		} 
+	); 
+	</script>
 
 </head>
 <body>
+
+
 <div id = "accounts">
 <?php
 session_start();
@@ -33,7 +43,8 @@ else if (isset($_SESSION['sess_username']))
 <div id="selectTable">
 
 	<form name="input" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-	Select Database <select name="teams">		
+	Select Database <select name="teams">	
+
 <?php
 /**
  *
@@ -56,37 +67,38 @@ echo	'</select><br />';
 echo	'<input type="submit" value="Show Stats"> ';
 echo	'</form>' ;
 echo "</div>";
+
+
 	if(isset($_POST['teams']))
 	{
 
 
 
 		$database = $_POST['teams'];
+		echo "<div id='tableLabel'><h3>$database</h3></div>";
 		$result = mysql_query("SELECT * FROM `$database`"); 
 
-			
 
-		
-		echo "<table id='statsTable' class='sortable' border='1'>
+		echo "<table id='statsTable' class='tablesorter' cellspacing='1' cellpadding='0' border='1'>
 		<thead>
 		<tr>
-		<th>Name<br /></th>
-		<th>SteamID<br /></th>
-		<th>Class</th>		
-		<th>Kills</th>
-		<th>Assists</th>
-		<th>Deaths</th>
-		<th>Damage</th>
-		<th>DA/M</th>
-		<th>KA/D</th>
-		<th>K/D</th>
-		<th>Damage Taken</th>
-		<th>Health P/U</th>
-		<th>Backstabs</th>	
-		<th>Headshots</th>
-		<th>Airshots</th>		
-		<th>Sentries</th>
-		<th>Captures</th>
+		<th class='header'>Name</th>
+		<th class='header'>SteamID</th>
+		<th class='header'>Class</th>		
+		<th class='header'>Kills </th>
+		<th class='header'>Assists </th>
+		<th class='header'>Deaths </th>
+		<th class='header'>Damage </th>
+		<th class='header'>DA/M </th>
+		<th class='header'>KA/D </th>
+		<th class='header'>K/D </th>
+		<th class='header'>Dmg Taken</th>
+		<th class='header'>Health P/U</th>
+		<th class='header'>Backstabs</th>	
+		<th class='header'>Headshots</th>
+		<th class='header'>Airshots</th>		
+		<th class='header'>Sentries</th>
+		<th class='header'>Captures</th>
 		</tr>
 		</thead>";
 		
@@ -98,7 +110,7 @@ echo "</div>";
 			echo "<tr>";
 			echo "<td>" . $row['stats_name'] . "</td>";
 			echo "<td>" . $row['stats_steamid'] . "</td>";
-			echo "<td>" . $row['stats_class'] . "</td>";
+			echo "<td>"  . $row['stats_class'] . "</td>";
 			echo "<td>" . $row['stats_kills'] . "</td>";
 			echo "<td>" . $row['stats_assist'] . "</td>";
 			echo "<td>" . $row['stats_deaths'] . "</td>";
@@ -107,11 +119,11 @@ echo "</div>";
 			echo "<td>" . $row['stats_kad'] . "</td>";
 			echo "<td>" . $row['stats_killdeaths'] . "</td>";
 			echo "<td>" . $row['stats_damagetaken'] . "</td>";
-			echo "<td>" . $row['stats_hpt'] . "</td>";
+			echo "<td>"  . $row['stats_hpt'] . "</td>";
 			echo "<td>" . $row['stats_backstab'] . "</td>";
-			echo "<td>" . $row['stats_hs'] . "</td>";
+			echo "<td>"  . $row['stats_hs'] . "</td>";
 			echo "<td>" . $row['stats_as'] . "</td>";
-			echo "<td>" . $row['stats_sb'] . "</td>";
+			echo "<td>"  . $row['stats_sb'] . "</td>";
 			echo "<td>" . $row['stats_cap'] . "</td>";
 			echo "</tr>";
 		}
