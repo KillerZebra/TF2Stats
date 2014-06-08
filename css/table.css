@@ -18,6 +18,11 @@
 	text-align: center;
 }
 
+#lastRow
+{
+	font-weight:700;
+}
+
 #donate-button
 {
 	height: 70px;

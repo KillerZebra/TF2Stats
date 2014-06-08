@@ -81,7 +81,7 @@ echo "</div>";
 		echo "<table id='statsTable' class='tablesorter' cellspacing='1' cellpadding='0' border='1'>
 		<thead>
 		<tr>
-			<th class='header'>Name</th>
+		<th class='header'>Name</th>
 		<th class='header'>SteamID</th>
 		<th class='header'>Class</th>		
 		<th class='header'>K </th>
@@ -106,7 +106,7 @@ echo "</div>";
 		while($row = mysql_fetch_array($result))
 		{
 
-			echo "<tr>";
+			echo "<tr align='center'>";
 			echo "<td>" . $row['stats_name'] . "</td>";
 			echo "<td>" . $row['stats_steamid'] . "</td>";
 			echo "<td>"  . $row['stats_class'] . "</td>";
@@ -128,78 +128,79 @@ echo "</div>";
 		}
 		echo "</tbody>";
 
-		echo "<td>" . " " .  "</td>";
-		echo "<td>" . " " . "</td>";
-		echo "<td>" . "Total" . "</td>";
+		echo "<tr id='lastRow' align='center'>";
+			echo "<td>" . " " .  "</td>";
+			echo "<td>" . " " . "</td>";
+			echo "<td>" . "Total" . "</td>";
 
-		$total = mysql_query("SELECT SUM(stats_kills) AS total_kills FROM `$database`"); 
-		$row = mysql_fetch_assoc($total); 			
-		$sum1 = $row['total_kills'];
-		echo "<td>" . $sum1 . "</td>";
+			$total = mysql_query("SELECT SUM(stats_kills) AS total_kills FROM `$database`"); 
+			$row = mysql_fetch_assoc($total); 			
+			$sum1 = $row['total_kills'];
+			echo "<td>" . $sum1 . "</td>";
 
-		$total = mysql_query("SELECT SUM(stats_assist) AS total_assist FROM `$database`"); 
-		$row = mysql_fetch_assoc($total); 			
-		$sum2 = $row['total_assist'];
-		echo "<td>" . $sum2 . "</td>";
+			$total = mysql_query("SELECT SUM(stats_assist) AS total_assist FROM `$database`"); 
+			$row = mysql_fetch_assoc($total); 			
+			$sum2 = $row['total_assist'];
+			echo "<td>" . $sum2 . "</td>";
 
-		$total = mysql_query("SELECT SUM(stats_deaths) AS total_deaths FROM `$database`"); 
-		$row = mysql_fetch_assoc($total); 			
-		$sum3 = $row['total_deaths'];
-		echo "<td>" . $sum3 . "</td>";
+			$total = mysql_query("SELECT SUM(stats_deaths) AS total_deaths FROM `$database`"); 
+			$row = mysql_fetch_assoc($total); 			
+			$sum3 = $row['total_deaths'];
+			echo "<td>" . $sum3 . "</td>";
 
-		$total = mysql_query("SELECT SUM(stats_damage) AS total_damage FROM `$database`"); 
-		$row = mysql_fetch_assoc($total); 			
-		$sum = $row['total_damage'];
-		echo "<td>" . $sum . "</td>";
+			$total = mysql_query("SELECT SUM(stats_damage) AS total_damage FROM `$database`"); 
+			$row = mysql_fetch_assoc($total); 			
+			$sum = $row['total_damage'];
+			echo "<td>" . $sum . "</td>";
 
-		$total = mysql_query("SELECT SUM(stats_dam) AS total_dam FROM `$database`"); 
-		$row = mysql_fetch_assoc($total); 			
-		$sum = $row['total_dam'];
-		echo "<td>" . $sum . "</td>";
+			$total = mysql_query("SELECT SUM(stats_dam) AS total_dam FROM `$database`"); 
+			$row = mysql_fetch_assoc($total); 			
+			$sum = $row['total_dam'];
+			echo "<td>" . $sum . "</td>";
 
 
-		$sum4 = ($sum1 + $sum2) / $sum3;
-		echo "<td>" . number_format($sum4,2) . "</td>";
+			$sum4 = ($sum1 + $sum2) / $sum3;
+			echo "<td>" . number_format($sum4,2) . "</td>";
 
-	
-		$sum5 = $sum1 / $sum3;
-		echo "<td>" . number_format($sum5,2) . "</td>";
-
-		$total = mysql_query("SELECT SUM(stats_damagetaken) AS total_dt FROM `$database`"); 
-		$row = mysql_fetch_assoc($total); 			
-		$sum = $row['total_dt'];
-		echo "<td>" . $sum . "</td>";
-
-		$total = mysql_query("SELECT SUM(stats_hpt) AS total_hpt FROM `$database`"); 
-		$row = mysql_fetch_assoc($total); 			
-		$sum = $row['total_hpt'];
-		echo "<td>" . $sum . "</td>";
-
-		$total = mysql_query("SELECT SUM(stats_backstab) AS total_backstab FROM `$database`"); 
-		$row = mysql_fetch_assoc($total); 			
-		$sum = $row['total_backstab'];
-		echo "<td>" . $sum . "</td>";
-
-		$total = mysql_query("SELECT SUM(stats_hs) AS total_hs FROM `$database`"); 
-		$row = mysql_fetch_assoc($total); 			
-		$sum = $row['total_hs'];
-		echo "<td>" . $sum . "</td>";
-
-		$total = mysql_query("SELECT SUM(stats_as) AS total_as FROM `$database`"); 
-		$row = mysql_fetch_assoc($total); 			
-		$sum = $row['total_as'];
-		echo "<td>" . $sum . "</td>";
-
-		$total = mysql_query("SELECT SUM(stats_sb) AS total_sb FROM `$database`"); 
-		$row = mysql_fetch_assoc($total); 			
-		$sum = $row['total_sb'];
-		echo "<td>" . $sum . "</td>";
-
-		$total = mysql_query("SELECT SUM(stats_cap) AS total_cap FROM `$database`"); 
-		$row = mysql_fetch_assoc($total); 			
-		$sum = $row['total_cap'];
-		echo "<td>" . $sum . "</td>";
 		
+			$sum5 = $sum1 / $sum3;
+			echo "<td>" . number_format($sum5,2) . "</td>";
+
+			$total = mysql_query("SELECT SUM(stats_damagetaken) AS total_dt FROM `$database`"); 
+			$row = mysql_fetch_assoc($total); 			
+			$sum = $row['total_dt'];
+			echo "<td>" . $sum . "</td>";
+
+			$total = mysql_query("SELECT SUM(stats_hpt) AS total_hpt FROM `$database`"); 
+			$row = mysql_fetch_assoc($total); 			
+			$sum = $row['total_hpt'];
+			echo "<td>" . $sum . "</td>";
+
+			$total = mysql_query("SELECT SUM(stats_backstab) AS total_backstab FROM `$database`"); 
+			$row = mysql_fetch_assoc($total); 			
+			$sum = $row['total_backstab'];
+			echo "<td>" . $sum . "</td>";
+
+			$total = mysql_query("SELECT SUM(stats_hs) AS total_hs FROM `$database`"); 
+			$row = mysql_fetch_assoc($total); 			
+			$sum = $row['total_hs'];
+			echo "<td>" . $sum . "</td>";
+
+			$total = mysql_query("SELECT SUM(stats_as) AS total_as FROM `$database`"); 
+			$row = mysql_fetch_assoc($total); 			
+			$sum = $row['total_as'];
+			echo "<td>" . $sum . "</td>";
+
+			$total = mysql_query("SELECT SUM(stats_sb) AS total_sb FROM `$database`"); 
+			$row = mysql_fetch_assoc($total); 			
+			$sum = $row['total_sb'];
+			echo "<td>" . $sum . "</td>";
+
+			$total = mysql_query("SELECT SUM(stats_cap) AS total_cap FROM `$database`"); 
+			$row = mysql_fetch_assoc($total); 			
+			$sum = $row['total_cap'];
+			echo "<td>" . $sum . "</td>";
+		echo "</tr>";
 
 		echo "</table>";
 
