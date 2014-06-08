@@ -72,6 +72,7 @@ if($league == "hl")
 	for($ii = 1; $ii <= 18; $ii++ )
 	{
 		$arraySize = count($players[$ii]);
+		$findStats = 70; 
 
 			//makes all arrays the size of 100 for easy input. Every table converted into a random array size, making it impossible to get data from. 
 			while($arraySize <= 102)
@@ -84,6 +85,7 @@ if($league == "hl")
 			$get75 = ($players[$ii][75]);
 			if(strlen($get75) > 15)
 			{
+				$findStats = 70; 
 				if($ii == 1)
 				{
 					$j = 50;
@@ -107,7 +109,7 @@ if($league == "hl")
 				//this loop checks the team. If the team color isn't = to what you inputted, the stats are not recorded. 
 				if(trim($colorString) == trim($team))//trim removes whitespaces before and after the character. 
 				{
-					
+
 					// gets player name
 					$name = substr($players[$ii][2], 94);
 					$nameString = str_replace('</a>', '', $name); // removes anchor tag characters after name
@@ -117,70 +119,88 @@ if($league == "hl")
 
 					$class = getClass($players[$ii]);// directs to getClass.php	
 
-					// gets player kills
-					$kills = ($players[$ii][77]);
+					while(strlen($players[$ii][$findStats]) != 2 or strlen($players[$ii][$findStats]) == 1)
+					{
+						$findStats++;
 
-					// gets player assists
-					$assists = $players[$ii][79];
+						if(strlen($players[$ii][$findStats]) == 2 or strlen($players[$ii][$findStats]) == 1)
+						{
 
-					// gets player deaths
-					$deaths = $players[$ii][81];
+							if(is_numeric($players[$ii][$findStats]))
+							{
+								$kills = $players[$ii][$findStats];
+								$findStats = $findStats + 2;
+								// gets player assists
+								$assists = $players[$ii][$findStats];
+								$findStats = $findStats + 2;
+								// gets player deaths
+								$deaths = $players[$ii][$findStats];
+								$findStats = $findStats + 2;
+								// gets player total damage output
+								$damage = $players[$ii][$findStats];
+								$findStats = $findStats + 2;
+								// gets player damage per minute
+								$damagem = $players[$ii][$findStats];
+								$findStats = $findStats + 2;
+								// gets player kill/assists per death
+								$kad = $players[$ii][$findStats];
+								$findStats = $findStats + 2;
+								// gets player kill death
+								$kd = $players[$ii][$findStats];
+								$findStats = $findStats + 2;
+								// gets players total damage taken
+								$damaget = $players[$ii][$findStats];
+								$findStats = $findStats + 2;
+								// gets player health packs used
+								$hp = $players[$ii][$findStats];
+								$findStats = $findStats + 2;
+								// gets player backstabs
+								$backstabs = $players[$ii][$findStats];
+								$findStats = $findStats + 2;
+								// gets player headshots
+								$headshot = $players[$ii][$findStats];
+								$findStats = $findStats + 2;
+								// gets player sentries built
+								$sentries = $players[$ii][$findStats];
+								$findStats = $findStats + 2;
+								// gets player capture points
+								$captures = $players[$ii][$findStats];
+								$findStats = $findStats + 2;
 
-					// gets player total damage output
-					$damage = $players[$ii][83];
+								$airshots = 0;
 
-					// gets player damage per minute
-					$damagem = $players[$ii][85];
+								echo "<br/ >Name: $nameString " . "<br /> ";
+								echo "Class: $class " . "<br /> ";
+								echo "Time: $time  <br /> "  ; 
+								echo "Edit Time: $edittime  <br /> "  ; 		
+								echo "STEAM ID: $fullID <br / >";
+								echo "Kills: $kills" . "<br /> ";
+								echo "Assists: $assists" . "<br /> ";
+								echo "Deaths: $deaths" . "<br /> ";
+								echo "Damage: $damage" . "<br /> ";
+								echo "Damage Per Min: $damagem" . "<br /> ";
+								echo "Kill/Assist per Death: $kad" . "<br /> ";
+								echo "Kill/Death: $kd" . "<br /> ";
+								echo "Health picked up: $hp" . "<br />";
+								echo "Backstabs: $backstabs" . "<br /> ";
+								echo "Headshots: $headshot" . "<br /> ";
+								echo "Aitshots: $airshots". "<br /> ";
+								echo "Sentries: $sentries" . "<br /> ";
+								echo "Captures: $captures" . "<br /> ";
+								break;
+								}
+						}
 
-					// gets player kill/assists per death
-					$kad = $players[$ii][87];
+							
+						
 
-					// gets player kill death
-					$kd = $players[$ii][89];
 
-					// gets players total damage taken
-					$damaget = $players[$ii][91];
-
-					// gets player health packs used
-					$hp = $players[$ii][93];	
-
-					// gets player backstabs
-					$backstabs = $players[$ii][95];	
-
-					// gets player headshots
-					$headshot = $players[$ii][97];	
-
-					// gets player sentries built
-					$sentries = $players[$ii][99];	
-
-					// gets player capture points
-					$captures = $players[$ii][101];
-
-					$airshots = 0;
-
+					}
 					//this block prints out the values the stats are attached too. It is used for debugging (making sure all the values got assigned) and is not needed in the code. 
-/*					
-					echo "<br/ >Name: $nameString " . "<br /> ";
-					echo "Class: $class " . "<br /> ";
-					echo "Time: $time  <br /> "  ; 
-					echo "Edit Time: $edittime  <br /> "  ; 		
-					echo "STEAM ID: $fullID <br / >";
-					echo "Kills: $kills" . "<br /> ";
-					echo "Assists: $assists" . "<br /> ";
-					echo "Deaths: $deaths" . "<br /> ";
-					echo "Damage: $damage" . "<br /> ";
-					echo "Damage Per Min: $damagem" . "<br /> ";
-					echo "Kill/Assist per Death: $kad" . "<br /> ";
-					echo "Kill/Death: $kd" . "<br /> ";
-					echo "Health picked up: $hp" . "<br />";
-					echo "Backstabs: $backstabs" . "<br /> ";
-					echo "Headshots: $headshot" . "<br /> ";
-					echo "Aitshots: $airshots". "<br /> ";
-					echo "Sentries: $sentries" . "<br /> ";
-					echo "Captures: $captures" . "<br /> ";
+			
 					
-*/
-					mySQLentry( $time , $database , $nameString , $fullID , $class , $kills , $assists , $deaths , $damage , $damagem , $kad , $kd , $damaget, $hp , $backstabs , $headshot , $airshots , $sentries , $captures);
+
+					//mySQLentry( $time , $database , $nameString , $fullID , $class , $kills , $assists , $deaths , $damage , $damagem , $kad , $kd , $damaget, $hp , $backstabs , $headshot , $airshots , $sentries , $captures);
 					
 
 					
@@ -214,7 +234,7 @@ if($league == "hl")
 				if(trim($colorString) == trim($team))//trim removes whitespaces before and after the character. 
 				{
 					// gets player name
-
+					$findStats = 70; 
 					$name = substr($players[$ii][2], 94);
 					$nameString = str_replace('</a>', '', $name); // removes anchor tag characters after name
 
@@ -224,72 +244,86 @@ if($league == "hl")
 					$class = getClass($players[$ii]);// directs to getClass.php	
 
 					// gets player kills
-					$kills = ($players[$ii][76]);
+					while(strlen($players[$ii][$findStats]) != 2 || strlen($players[$ii][$findStats]) == 1)
+					{
+						$findStats++;
+						if(strlen($players[$ii][$findStats]) == 2 || strlen($players[$ii][$findStats]) == 1)
+						{
+							$kills = $players[$ii][$findStats];
+							$findStats = $findStats + 2;
+							// gets player assists
+							$assists = $players[$ii][$findStats];
+							$findStats = $findStats + 2;
+							// gets player deaths
+							$deaths = $players[$ii][$findStats];
+							$findStats = $findStats + 2;
+							// gets player total damage output
+							$damage = $players[$ii][$findStats];
+							$findStats = $findStats + 2;
+							// gets player damage per minute
+							$damagem = $players[$ii][$findStats];
+							$findStats = $findStats + 2;
+							// gets player kill/assists per death
+							$kad = $players[$ii][$findStats];
+							$findStats = $findStats + 2;
+							// gets player kill death
+							$kd = $players[$ii][$findStats];
+							$findStats = $findStats + 2;
+							// gets players total damage taken
+							$damaget = $players[$ii][$findStats];
+							$findStats = $findStats + 2;
+							// gets player health packs used
+							$hp = $players[$ii][$findStats];
+							$findStats = $findStats + 2;
+							// gets player backstabs
+							$backstabs = $players[$ii][$findStats];
+							$findStats = $findStats + 2;
+							// gets player headshots
+							$headshot = $players[$ii][$findStats];
+							$findStats = $findStats + 2;
 
-					// gets player assists
-					$assists = $players[$ii][78];
+							$airshots = $players[$ii][$findStats];
+							$findStats = $findStats + 2;
+							// gets player sentries built
+							$sentries = $players[$ii][$findStats];
+							$findStats = $findStats + 2;
+							// gets player capture points
+							$captures = $players[$ii][$findStats];
+							$findStats = $findStats + 2;
 
-					// gets player deaths
-					$deaths = $players[$ii][80];
+							echo "<br/ >Name: $nameString " . "<br /> ";
+							echo "Class: $class " . "<br /> ";
+							echo "Time: $time  <br /> "  ; 		
+							echo "Edit Time: $edittime  <br /> "  ; 			
+							echo "STEAM ID: $fullID <br / >";
+							echo "Kills: $kills" . "<br /> ";
+							echo "Assists: $assists" . "<br /> ";
+							echo "Deaths: $deaths" . "<br /> ";
+							echo "Damage: $damage" . "<br /> ";
+							echo "Damage Per Min: $damagem" . "<br /> ";
+							echo "Kill/Assist per Death: $kad" . "<br /> ";
+							echo "Kill/Death: $kd" . "<br /> ";
+							echo "Health picked up: $hp" . "<br />";
+							echo "Backstabs: $backstabs" . "<br /> ";
+							echo "Headshots: $headshot" . "<br /> ";
+							echo "Aitshots: $airshots". "<br /> ";
+							echo "Sentries: $sentries" . "<br /> ";
+							echo "Captures: $captures" . "<br /> ";
+							break;
+						}
 
-					// gets player total damage output
-					$damage = $players[$ii][82];
 
-					// gets player damage per minute
-					$damagem = $players[$ii][84];
 
-					// gets player kill/assists per death
-					$kad = $players[$ii][86];
-
-					// gets player kill death
-					$kd = $players[$ii][88];
-
-					// gets players total damage taken
-					$damaget = $players[$ii][90];
-
-					// gets player health packs used
-					$hp = $players[$ii][92];	
-
-					// gets player backstabs
-					$backstabs = $players[$ii][94];	
-
-					// gets player headshots
-					$headshot = $players[$ii][96];	
-
-					//gets player airshots
-					$airshots = $players[$ii][98];	
-
-					// gets player sentries built
-					$sentries = $players[$ii][100];	
-
-					// gets player capture points
-					$captures = $players[$ii][102];
+					}
 
 					//this block prints out the values the stats are attached too. It is used for debugging (making sure all the values got assigned) and is not needed in the code. Look at the Array difference. 
-					/*
-					echo "<br/ >Name: $nameString " . "<br /> ";
-					echo "Class: $class " . "<br /> ";
-					echo "Time: $time  <br /> "  ; 		
-					echo "Edit Time: $edittime  <br /> "  ; 			
-					echo "STEAM ID: $fullID <br / >";
-					echo "Kills: $kills" . "<br /> ";
-					echo "Assists: $assists" . "<br /> ";
-					echo "Deaths: $deaths" . "<br /> ";
-					echo "Damage: $damage" . "<br /> ";
-					echo "Damage Per Min: $damagem" . "<br /> ";
-					echo "Kill/Assist per Death: $kad" . "<br /> ";
-					echo "Kill/Death: $kd" . "<br /> ";
-					echo "Health picked up: $hp" . "<br />";
-					echo "Backstabs: $backstabs" . "<br /> ";
-					echo "Headshots: $headshot" . "<br /> ";
-					echo "Aitshots: $airshots". "<br /> ";
-					echo "Sentries: $sentries" . "<br /> ";
-					echo "Captures: $captures" . "<br /> ";
-					*/
+					
+
+					
 					//calls on handler.php
 
 
-					mySQLentry( $time , $database , $nameString , $fullID , $class , $kills , $assists , $deaths , $damage , $damagem , $kad , $kd , $damaget, $hp , $backstabs , $headshot , $airshots , $sentries , $captures);
+					//mySQLentry( $time , $database , $nameString , $fullID , $class , $kills , $assists , $deaths , $damage , $damagem , $kad , $kd , $damaget, $hp , $backstabs , $headshot , $airshots , $sentries , $captures);
 				
 				}
 
@@ -519,7 +553,7 @@ if($league == "sixes")
 		}
 }
 
-//var_dump($players);
+var_dump($players);
 
 ?>
 

@@ -58,7 +58,7 @@ $file = "databases/database.txt";
 $linesInFile = count(file($file));
 //$openFile = fopen($file , 'r');
 
-for($i=0; $i <= $linesInFile; $i++)
+for($i=0; $i < $linesInFile; $i++)
 {
 	$lines = file($file);
 	echo	"<option value='" . $lines[$i]  . "'>$lines[$i]</option>";
