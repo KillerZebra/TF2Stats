@@ -168,7 +168,7 @@ if($league == "hl")
 								$findStats = $findStats + 2;
 
 								$airshots = 0;
-
+								/*
 								echo "<br/ >Name: $nameString " . "<br /> ";
 								echo "Class: $class " . "<br /> ";
 								echo "Time: $time  <br /> "  ; 
@@ -187,8 +187,10 @@ if($league == "hl")
 								echo "Aitshots: $airshots". "<br /> ";
 								echo "Sentries: $sentries" . "<br /> ";
 								echo "Captures: $captures" . "<br /> ";
+								*/
+								mySQLentry( $time , $database , $nameString , $fullID , $class , $kills , $assists , $deaths , $damage , $damagem , $kad , $kd , $damaget, $hp , $backstabs , $headshot , $airshots , $sentries , $captures);
 								break;
-								}
+							}
 						}
 
 							
@@ -200,7 +202,6 @@ if($league == "hl")
 			
 					
 
-					//mySQLentry( $time , $database , $nameString , $fullID , $class , $kills , $assists , $deaths , $damage , $damagem , $kad , $kd , $damaget, $hp , $backstabs , $headshot , $airshots , $sentries , $captures);
 					
 
 					
@@ -290,7 +291,7 @@ if($league == "hl")
 							// gets player capture points
 							$captures = $players[$ii][$findStats];
 							$findStats = $findStats + 2;
-
+							/*
 							echo "<br/ >Name: $nameString " . "<br /> ";
 							echo "Class: $class " . "<br /> ";
 							echo "Time: $time  <br /> "  ; 		
@@ -309,21 +310,15 @@ if($league == "hl")
 							echo "Aitshots: $airshots". "<br /> ";
 							echo "Sentries: $sentries" . "<br /> ";
 							echo "Captures: $captures" . "<br /> ";
+							*/
+							mySQLentry( $time , $database , $nameString , $fullID , $class , $kills , $assists , $deaths , $damage , $damagem , $kad , $kd , $damaget, $hp , $backstabs , $headshot , $airshots , $sentries , $captures);
+
 							break;
 						}
 
 
 
-					}
-
-					//this block prints out the values the stats are attached too. It is used for debugging (making sure all the values got assigned) and is not needed in the code. Look at the Array difference. 
-					
-
-					
-					//calls on handler.php
-
-
-					//mySQLentry( $time , $database , $nameString , $fullID , $class , $kills , $assists , $deaths , $damage , $damagem , $kad , $kd , $damaget, $hp , $backstabs , $headshot , $airshots , $sentries , $captures);
+					}					
 				
 				}
 
