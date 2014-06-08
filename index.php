@@ -77,27 +77,27 @@ echo "</div>";
 		$database = trim($_POST['teams']);
 		$result = mysql_query("SELECT * FROM `$database`"); 
 
-
+		echo "<div id=tableLabel><h3> $database </h3></div>";
 		echo "<table id='statsTable' class='tablesorter' cellspacing='1' cellpadding='0' border='1'>
 		<thead>
 		<tr>
-		<th class='header'>Name</th>
+			<th class='header'>Name</th>
 		<th class='header'>SteamID</th>
 		<th class='header'>Class</th>		
-		<th class='header'>Kills </th>
-		<th class='header'>Assists </th>
-		<th class='header'>Deaths </th>
-		<th class='header'>Damage </th>
+		<th class='header'>K </th>
+		<th class='header'>A </th>
+		<th class='header'>D </th>
+		<th class='header'>DA</th>
 		<th class='header'>DA/M </th>
 		<th class='header'>KA/D </th>
 		<th class='header'>K/D </th>
-		<th class='header'>Dmg Taken</th>
-		<th class='header'>Health P/U</th>
-		<th class='header'>Backstabs</th>	
-		<th class='header'>Headshots</th>
-		<th class='header'>Airshots</th>		
-		<th class='header'>Sentries</th>
-		<th class='header'>Captures</th>
+		<th class='header'>DT</th>
+		<th class='header'>HP</th>
+		<th class='header'>BS</th>	
+		<th class='header'>HS</th>
+		<th class='header'>AS</th>		
+		<th class='header'>SB</th>
+		<th class='header'>CAP</th>
 		</tr>
 		</thead>";
 		
