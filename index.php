@@ -255,7 +255,7 @@ if (isset($_SESSION['sess_username']))
 	else if ($_SESSION['sess_user_id'] == 1) //pretty princess database
 	{
 
-			echo "<option value='" . $lines[2]  . "'>$lines[2]</option>";
+			echo "<option value='" . $lines[1]  . "'>$lines[1]</option>";
 
 
 	}
