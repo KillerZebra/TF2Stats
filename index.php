@@ -2,9 +2,9 @@
 <head>
 <title> Stat </title>
 	<link rel="stylesheet" type="text/css" href="css/table.css">
-	<link media="print, projection, screen" type="text/css" href="/TF2Stats/js/tablesorter/themes/blue/style.css" rel="stylesheet">
-	<script type="text/javascript" src="/TF2Stats/js/tablesorter/jquery-latest.js"></script> 
-	<script type="text/javascript" src="/TF2Stats/js/tablesorter/jquery.tablesorter.js"></script> 
+	<link media="print, projection, screen" type="text/css" href="js/tablesorter/themes/blue/style.css" rel="stylesheet">
+	<script type="text/javascript" src="js/tablesorter/jquery-latest.js"></script> 
+	<script type="text/javascript" src="js/tablesorter/jquery.tablesorter.js"></script> 
 	<script>
 	$(document).ready(function() 
 		{ 
@@ -56,12 +56,12 @@ require("php/connect/connectDB.php");
 
 $file = "databases/database.txt";
 $linesInFile = count(file($file));
-$openFile = fopen($file , 'r');
+//$openFile = fopen($file , 'r');
 
-for($i=1; $i <= $linesInFile; $i++)
+for($i=0; $i <= $linesInFile; $i++)
 {
-	$lines = fgets($openFile);
-	echo	"<option value=$lines>$lines</option>";
+	$lines = file($file);
+	echo	"<option value='" . $lines[$i]  . "'>$lines[$i]</option>";
 }
 echo	'</select><br />';
 echo	'<input type="submit" value="Show Stats"> ';
@@ -74,8 +74,7 @@ echo "</div>";
 
 
 
-		$database = $_POST['teams'];
-		echo "<div id='tableLabel'><h3>$database</h3></div>";
+		$database = trim($_POST['teams']);
 		$result = mysql_query("SELECT * FROM `$database`"); 
 
 
