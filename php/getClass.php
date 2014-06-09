@@ -16,7 +16,7 @@
 		{
 			return "Sniper";
 		}
-		else if(array_search('Scattergun', $players) || array_search('Boston_basher', $players) || array_search('Guillotine', $players) || array_search('Sandman', $players))
+		else if(array_search('Scattergun', $players) || array_search('Boston_basher', $players) || array_search('Guillotine', $players) || array_search('Sandman', $players) || array_search('Soda_popper', $players))
 		{
 			return "Scout";
 			
