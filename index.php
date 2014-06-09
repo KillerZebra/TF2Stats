@@ -84,20 +84,20 @@ echo "</div>";
 			<th class='header'>Name</th>
 		<th class='header'>SteamID</th>
 		<th class='header'>Class</th>		
-		<th class='header'>K </th>
-		<th class='header'>A </th>
-		<th class='header'>D </th>
-		<th class='header'>DA</th>
-		<th class='header'>DA/M </th>
-		<th class='header'>KA/D </th>
-		<th class='header'>K/D </th>
-		<th class='header'>DT</th>
-		<th class='header'>HP</th>
-		<th class='header'>BS</th>	
-		<th class='header'>HS</th>
-		<th class='header'>AS</th>		
-		<th class='header'>SB</th>
-		<th class='header'>CAP</th>
+		<th class='header' title = 'Kills'>K </th>
+		<th class='header' title = 'Assists'>A </th>
+		<th class='header' title = 'Deaths'>D </th>
+		<th class='header' title= 'Damage'>DA</th>
+		<th class='header' title = 'Damage per Minute'>DA/M </th>
+		<th class='header' title = 'Kills & Assits per Death'>KA/D </th>
+		<th class='header' title = 'Kills per Death'>K/D </th>
+		<th class='header' title = 'Damage Taken'>DT</th>
+		<th class='header' title = Health Pick-Ups' >HP</th>
+		<th class='header' title - 'Backstabs'>BS</th>	
+		<th class='header' title = 'Headshots'>HS</th>
+		<th class='header' title = 'Airshots'>AS</th>		
+		<th class='header' title = 'Sentries Built'>SB</th>
+		<th class='header' title = 'Capture Points Captured'>CAP</th>
 		</tr>
 		</thead>";
 		
@@ -128,8 +128,8 @@ echo "</div>";
 		}
 		echo "</tbody>";
 
-		echo "<td>" . " " .  "</td>";
-		echo "<td>" . " " . "</td>";
+		echo "<td colspan='2' >" . " " .  "</td>";
+		#echo "<td>" . " " . "</td>";
 		echo "<td>" . "Total" . "</td>";
 
 		$total = mysql_query("SELECT SUM(stats_kills) AS total_kills FROM `$database`"); 
