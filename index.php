@@ -92,8 +92,8 @@ echo "</div>";
 		<th class='header' title = 'Kills & Assits per Death'>KA/D </th>
 		<th class='header' title = 'Kills per Death'>K/D </th>
 		<th class='header' title = 'Damage Taken'>DT</th>
-		<th class='header' title = Health Pick-Ups' >HP</th>
-		<th class='header' title - 'Backstabs'>BS</th>	
+		<th class='header' title = 'Health Pick-Ups' >HP</th>
+		<th class='header' title = 'Backstabs'>BS</th>	
 		<th class='header' title = 'Headshots'>HS</th>
 		<th class='header' title = 'Airshots'>AS</th>		
 		<th class='header' title = 'Sentries Built'>SB</th>
