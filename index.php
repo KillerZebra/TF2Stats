@@ -257,17 +257,32 @@ if (isset($_SESSION['sess_username']))
 	{
 
 			echo "<option value='" . $lines[1]  . "'>$lines[1]</option>";
-
-
 	}
-	echo	'</select><br />';
-	echo	'<input type="submit" value="Submit Stats"> ';
-
+	echo '</select><br />';
+	echo '<input type="submit" value="Submit Stats"> ';
+	echo '</form>';
+	echo '</div>';
 }
 
+for($i=1; $i <= $linesInFile; $i++)
+{
+	$lines = file($file);
+}
+	echo '<div id=backup>';
+	echo '<form name="input2" action="php/backup.php" method="post">';
+	echo 'Select Database <select name="teams2">';
 
+	if ($_SESSION['sess_user_id'] == 0) //super admin, can see all databases
+	{
+		for($i=0; $i < $linesInFile; $i++)
+		{
+			echo "<option value='" . $lines[$i]  . "'>$lines[$i]</option>";
+		}	
+	}
 
-
+	echo '<input type="submit" value="Backup">';
+	echo '</form>';
+	echo '</div>';
 ?>
 
 

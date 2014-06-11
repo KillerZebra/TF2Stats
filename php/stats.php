@@ -37,11 +37,11 @@ $players= array();
 
 if ($league == "hl")
 {
-	for($i=1; $i<=18; $i++)
+	for($i=0; $i<=18; $i++)
 	{
 		$tables[$i]->plaintext . "<br />";
 
-		$players[$i] = preg_split( '/(<td>|<ul|<\/td>)/', $tables[$i],-1,PREG_SPLIT_NO_EMPTY); 	
+		$players[$i] = preg_split( '/(<td>|<ul|<\/td>|<span class="tip" title="|<\/span)/', $tables[$i],-1,PREG_SPLIT_NO_EMPTY); 	
 
 	}
 }
@@ -96,10 +96,9 @@ if($league == "hl")
 				$arraySize++;
 
 			}
-			$get75 = ($players[$ii][75]);
-			if(strlen($get75) > 15)
-			{
-				$findStats = 70; 
+			$get75 = ($players[$ii][69]);
+
+				$findStats = 75; 
 				if($ii == 1)
 				{
 					$j = 50;
@@ -133,11 +132,11 @@ if($league == "hl")
 
 					$class = getClass($players[$ii]);// directs to getClass.php	
 
-					while(strlen($players[$ii][$findStats]) != 2 or strlen($players[$ii][$findStats]) == 1)
+					while(strlen($players[$ii][$findStats]) != 2 || strlen($players[$ii][$findStats]) != 1)
 					{
 						$findStats++;
 
-						if(strlen($players[$ii][$findStats]) == 2 or strlen($players[$ii][$findStats]) == 1)
+						if(strlen($players[$ii][$findStats]) == 2 || strlen($players[$ii][$findStats]) == 1)
 						{
 
 							if(is_numeric($players[$ii][$findStats]))
@@ -174,14 +173,71 @@ if($league == "hl")
 								// gets player headshots
 								$headshot = $players[$ii][$findStats];
 								$findStats = $findStats + 2;
-								// gets player sentries built
-								$sentries = $players[$ii][$findStats];
-								$findStats = $findStats + 2;
-								// gets player capture points
-								$captures = $players[$ii][$findStats];
-								$findStats = $findStats + 2;
 
-								$airshots = 0;
+								if(in_array("AIRSHOTS\">AS", $players[0]))
+										{
+											$airshots = $players[$ii][$findStats];
+											$findStats = $findStats + 2;
+											if(in_array("Sentries built\">SB", $players[0]))
+											{
+												$sentries = $players[$ii][$findStats];
+												$findStats = $findStats + 2;
+												if(in_array("Capture Point Captures\">CAP", $players[0]))
+												{
+													$captures = $players[$ii][$findStats];
+													$findStats = $findStats + 2;
+												}
+												else if(!(in_array("Capture Point Captures\">CAP", $players[0])))
+												{
+													$captures = 0;
+												}
+											}
+											else if(!(in_array("Sentries built\">SB", $players[0])))
+											{
+												$sentries = 0;
+												if(in_array("Capture Point Captures\">CAP", $players[0]))
+												{
+													$captures = $players[$ii][$findStats];
+													$findStats = $findStats + 2;
+												}
+												else if(!(in_array("Capture Point Captures\">CAP", $players[0])))
+												{
+													$captures = 0;
+												}
+											}	
+										}
+								if(!(in_array("AIRSHOTS\">AS", $players[0])))
+										{
+											$airshots = 0;
+											if(in_array("Sentries built\">SB", $players[0]))
+											{
+												$sentries = $players[$ii][$findStats];
+												$findStats = $findStats + 2;
+												if(in_array("Capture Point Captures\">CAP", $players[0]))
+												{
+													$captures = $players[$ii][$findStats];
+													$findStats = $findStats + 2;
+												}
+												else if(!(in_array("Capture Point Captures\">CAP", $players[0])))
+												{
+													$captures = 0;
+												}
+											}
+											else if(!(in_array("Sentries built\">SB", $players[0])))
+											{
+												$sentries = 0;
+												if(in_array("Capture Point Captures\">CAP", $players[0]))
+												{
+													$captures = $players[$ii][$findStats];
+													$findStats = $findStats + 2;
+												}
+												else if(!(in_array("Capture Point Captures\">CAP", $players[0])))
+												{
+													$captures = 0;
+												}
+											}
+										}
+								// gets player sentries built
 								/*
 								echo "<br/ >Name: $nameString " . "<br /> ";
 								echo "Class: $class " . "<br /> ";
@@ -202,7 +258,7 @@ if($league == "hl")
 								echo "Sentries: $sentries" . "<br /> ";
 								echo "Captures: $captures" . "<br /> ";
 								*/
-								mySQLentry( $time , $database , $nameString , $fullID , $class , $kills , $assists , $deaths , $damage , $damagem , $kad , $kd , $damaget, $hp , $backstabs , $headshot , $airshots , $sentries , $captures);
+								mySQLentry( $time , $database , $nameString , $fullID , $class , $kills , $assists , $deaths , $damage , $damagem , $kad , $kd , $hp , $backstabs , $headshot , $airshots , $sentries , $captures);
 								break;
 							}
 						}
@@ -221,122 +277,8 @@ if($league == "hl")
 					
 				}	
 
-			}	
-			//the purpose of this if/else statement is because if a match has 0 airshots, that stat doesn't appear. If there is more than 1 airshot, it appears, and throws the stat placement off by one. 
-			else
-			{
-				if($ii == 1)
-				{
-					$j = 50;
-					while(strlen($players[1][$j]) != 5)
-					{
-						$j++;
-						if(strlen($players[1][$j]) == 5)
-						{
-							$edittime = substr($players[1][$j], -2, 2);
-							$time = substr($players[1][$j], 0, 2);
-							$edittime = number_format(($edittime / 60),2);
-							$time = $time + $edittime; 
-
-						}
-					}
-				}
-				//set values
-				$color = substr($players[$ii][0],23);
-				$colorString = str_replace('</td>', '', $color);// removes table data characters after team color
-
-				//this loop checks the team. If the team color isn't = to what you inputted, the stats are not recorded. 
-				if(trim($colorString) == trim($team))//trim removes whitespaces before and after the character. 
-				{
-					// gets player name
-					$findStats = 70; 
-					$name = substr($players[$ii][2], 94);
-					$nameString = str_replace('</a>', '', $name); // removes anchor tag characters after name
-
-					// gets player steam id
-					$fullID = substr($players[$ii][3], 374, 18);
-
-					$class = getClass($players[$ii]);// directs to getClass.php	
-
-					// gets player kills
-					while(strlen($players[$ii][$findStats]) != 2 || strlen($players[$ii][$findStats]) == 1)
-					{
-						$findStats++;
-						if(strlen($players[$ii][$findStats]) == 2 || strlen($players[$ii][$findStats]) == 1)
-						{
-							$kills = $players[$ii][$findStats];
-							$findStats = $findStats + 2;
-							// gets player assists
-							$assists = $players[$ii][$findStats];
-							$findStats = $findStats + 2;
-							// gets player deaths
-							$deaths = $players[$ii][$findStats];
-							$findStats = $findStats + 2;
-							// gets player total damage output
-							$damage = $players[$ii][$findStats];
-							$findStats = $findStats + 2;
-							// gets player damage per minute
-							$damagem = $players[$ii][$findStats];
-							$findStats = $findStats + 2;
-							// gets player kill/assists per death
-							$kad = $players[$ii][$findStats];
-							$findStats = $findStats + 2;
-							// gets player kill death
-							$kd = $players[$ii][$findStats];
-							$findStats = $findStats + 2;
-							// gets players total damage taken
-							$damaget = $players[$ii][$findStats];
-							$findStats = $findStats + 2;
-							// gets player health packs used
-							$hp = $players[$ii][$findStats];
-							$findStats = $findStats + 2;
-							// gets player backstabs
-							$backstabs = $players[$ii][$findStats];
-							$findStats = $findStats + 2;
-							// gets player headshots
-							$headshot = $players[$ii][$findStats];
-							$findStats = $findStats + 2;
-
-							$airshots = $players[$ii][$findStats];
-							$findStats = $findStats + 2;
-							// gets player sentries built
-							$sentries = $players[$ii][$findStats];
-							$findStats = $findStats + 2;
-							// gets player capture points
-							$captures = $players[$ii][$findStats];
-							$findStats = $findStats + 2;
-							/*
-							echo "<br/ >Name: $nameString " . "<br /> ";
-							echo "Class: $class " . "<br /> ";
-							echo "Time: $time  <br /> "  ; 		
-							echo "Edit Time: $edittime  <br /> "  ; 			
-							echo "STEAM ID: $fullID <br / >";
-							echo "Kills: $kills" . "<br /> ";
-							echo "Assists: $assists" . "<br /> ";
-							echo "Deaths: $deaths" . "<br /> ";
-							echo "Damage: $damage" . "<br /> ";
-							echo "Damage Per Min: $damagem" . "<br /> ";
-							echo "Kill/Assist per Death: $kad" . "<br /> ";
-							echo "Kill/Death: $kd" . "<br /> ";
-							echo "Health picked up: $hp" . "<br />";
-							echo "Backstabs: $backstabs" . "<br /> ";
-							echo "Headshots: $headshot" . "<br /> ";
-							echo "Aitshots: $airshots". "<br /> ";
-							echo "Sentries: $sentries" . "<br /> ";
-							echo "Captures: $captures" . "<br /> ";
-							*/
-							mySQLentry( $time , $database , $nameString , $fullID , $class , $kills , $assists , $deaths , $damage , $damagem , $kad , $kd , $damaget, $hp , $backstabs , $headshot , $airshots , $sentries , $captures);
-
-							break;
-						}
-
-
-
-					}					
 				
-				}
-
-			}
+			//the purpose of this if/else statement is because if a match has 0 airshots, that stat doesn't appear. If there is more than 1 airshot, it appears, and throws the stat placement off by one. 
 		}
 }
 if($league == "sixes")
@@ -749,7 +691,7 @@ if($league == "sixes")
 		}
 }
 
-var_dump($players);
+//var_dump($players);
 
 ?>
 
