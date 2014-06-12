@@ -287,9 +287,12 @@ if($league == "hl")
 					
 				}	
 
-				
-			//the purpose of this if/else statement is because if a match has 0 airshots, that stat doesn't appear. If there is more than 1 airshot, it appears, and throws the stat placement off by one. 
+			if($ii == 18)
+			{
+				backupStats( $database );// directs to backup.php	
+			}
 		}
+
 }
 if($league == "sixes")
 {
@@ -700,7 +703,7 @@ if($league == "sixes")
 		}
 }
 
-var_dump($players);
+//var_dump($players);
 
 ?>
 

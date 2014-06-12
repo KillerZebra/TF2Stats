@@ -14,6 +14,8 @@
 	function mySQLentry( $time , $database , $nameString , $fullID , $class , $killsString , $assistsString , $deathsString , $damageString , $damagemString , $kadString , $kdString , $damagetString , $hpString , $backstabsString , $headshotString , $airshotString , $sentriesString , $capturesString)
 	{
 		require("connect/connectDB.php");
+		include_once('backup.php');
+
 
 		$val = mysql_query("SELECT 1 FROM `$database`");
 
@@ -37,6 +39,7 @@
 	    	if( $result )
 	    	{
 	    		echo "Successfully updated $nameString ||| $fullID <br />";
+
 	 	   	}
 	 	   	else
 	    	{
@@ -52,6 +55,7 @@
 	    	if( $result )
 	    	{
 	    		echo "Successfully imported $nameString ||| $fullID <br />";
+
 	 	   	}
 	 	   	else
 	    	{

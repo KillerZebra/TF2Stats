@@ -26,7 +26,9 @@ if (!isset($_SESSION['sess_username']))
 }
 else if (isset($_SESSION['sess_username']))
 {
-	echo '<a href = "php/accounts/logout.php">Logout | </a>';
+	$username = $_SESSION['sess_username'];
+	echo "Welcome, " . $username . "! | ";
+	echo '<a href = "php/accounts/logout.php">Logout,| </a>';
 	if ($_SESSION['sess_user_id'] == 0) //super admin, can see all databases
 	{
 		echo	'<a href = "php/accounts/register.php">Make New Accounts</a>';
@@ -268,7 +270,7 @@ for($i=1; $i <= $linesInFile; $i++)
 {
 	$lines = file($file);
 }
-	echo '<div id=backup>';
+	echo '<div id="restore">';
 	echo '<form name="input2" action="php/backup.php" method="post">';
 	echo 'Select Database <select name="teams2">';
 
