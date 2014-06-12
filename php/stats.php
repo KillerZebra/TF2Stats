@@ -19,10 +19,41 @@ if($editurl != "http://")
 	//checks to see if the url contains http://  . If it doesn't it will add it to the begining. 
 	$url = "http://" . $url;
 }
+
 if (strlen($url) > 21) 
 {
 		//checks to see if the highlight is in the url, if it is true, it removes it. 
 		$url = substr($url,0,21);
+}
+
+// This is the file holding the URLs of the Log files that have been uploaded
+$logFile = "logURL.txt";
+
+if (file_exists($logFile) == false){
+	$content = htmlspecialchars($url);
+	$fp = fopen($logFile,"wb");
+	fwrite($fp,$content . PHP_EOL);
+	fclose($fp);
+}
+else {
+	$lines = file($logFile);
+	$loglength = count($lines);
+	/*for ($i = 0; $i < $loglength; $i++) {
+		$lines = file($logFile);
+		if ($lines[$i] == $url) {
+			echo "That log file already exists";
+			break;
+		}
+	
+	}
+	*/
+	foreach ($lines as $line_num => $line) {
+		$line = substr($line, 0, -2);
+		if ($line == $url) {
+		echo "That log file already exists! Uploading duplicate stats will cause the stats to be inccorrect. ";
+		}	
+} 
+file_put_contents($logFile, $url . PHP_EOL, FILE_APPEND | LOCK_EX);
 }
 
 $team = $_POST['team'];
