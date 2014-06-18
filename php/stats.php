@@ -318,12 +318,12 @@ if($league == "hl")
 
 					
 				}	
-			/*
+			
 			if($ii == 18)
 			{
 				backupStats( $database );// directs to backup.php	
 			}
-			*/
+			
 		}
 
 }
