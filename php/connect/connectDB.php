@@ -4,14 +4,14 @@
 	$username = "root";
 	$password = "";
 
-	$dbName = "tf2logs";
+	$dbName = "aguaruim_tf2logs";
 
 	$dbConnect = mysql_connect( $hostname , $username , $password );
 	$dbSelect  = mysql_select_db( $dbName , $dbConnect );
 
 
-/*
-	if ( $dbConnect)
+
+	/*if ( $dbConnect)
 		{
 			echo "MySQL connection: PASS<br /> <br />";
 
