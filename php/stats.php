@@ -25,6 +25,40 @@ if (strlen($url) > 21)
 		$url = substr($url,0,21);
 }
 
+<<<<<<< HEAD
+=======
+// This is the file holding the URLs of the Log files that have been uploaded
+$logFile = "../databases/urls/logURL.txt";
+
+if (file_exists($logFile) == false)
+{
+	$content = htmlspecialchars($url);
+	$fp = fopen($logFile,"wb");
+	fwrite($fp,$content . PHP_EOL);
+	fclose($fp);
+}
+else 
+{
+	$lines = file($logFile);
+	$loglength = count($lines);
+
+	foreach ($lines as $line_num => $line)
+	{
+		$line = substr($line, 0, -2);
+		if ($line == $url) 
+		{
+			echo "That log file already exists!";
+		}	
+		else
+		{
+			echo "Adding $url to the text document. ";
+			file_put_contents($logFile, $url . PHP_EOL, FILE_APPEND | LOCK_EX);
+		}
+	} 
+}
+
+
+>>>>>>> origin/master
 $team = $_POST['team'];
 $database = trim($_POST['database']);
 $league = $_POST['league'];
@@ -276,9 +310,18 @@ if($league == "hl")
 
 					
 				}	
+<<<<<<< HEAD
 
 				
 			//the purpose of this if/else statement is because if a match has 0 airshots, that stat doesn't appear. If there is more than 1 airshot, it appears, and throws the stat placement off by one. 
+=======
+			/*
+			if($ii == 18)
+			{
+				backupStats( $database );// directs to backup.php	
+			}
+			*/
+>>>>>>> origin/master
 		}
 }
 if($league == "sixes")
