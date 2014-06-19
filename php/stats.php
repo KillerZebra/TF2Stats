@@ -29,6 +29,7 @@ if (strlen($url) > 21)
 // This is the file holding the URLs of the Log files that have been uploaded
 $logFile = "../databases/urls/logURL.txt";
 
+//Checks to see if a logfile has been exists on the server, if not creates one. 
 if (file_exists($logFile) == false)
 {
 	$content = htmlspecialchars($url);
@@ -36,25 +37,28 @@ if (file_exists($logFile) == false)
 	fwrite($fp,$content . PHP_EOL);
 	fclose($fp);
 }
-else 
-{
-	$lines = file($logFile);
-	$loglength = count($lines);
+else {
 
-	foreach ($lines as $line_num => $line)
+	//This makes $lines an array of lines from the $logFile. 
+	$lines = file($logFile);
+	
+	//Iterates over the array. $lines is the array, $line_num is the index, $ line is the string on the line.
+	foreach ($lines as $line_num => $line) 
 	{
+		//The process adds two whitespaces, this chops those off to match the length of $url to ensure proper comparison 
 		$line = substr($line, 0, -2);
-		if ($line == $url) 
-		{
-			echo "That log file already exists!";
-		}	
-		else
-		{
-			echo "Adding $url to the text document. ";
-			file_put_contents($logFile, $url . PHP_EOL, FILE_APPEND | LOCK_EX);
+		//If the log the user is attempting to enter has already been logged, user will be re-directed back to index and stats will exit
+		if ($line == $url) {
+			echo "That log file already exists! <br / > Stats will not be altered. <br /> <br / > ";
+			header("Refresh: 10; url=../index.php");
+			exit;
 		}
-	} 
+		//there is no else, the next bit needs execute outside of the foreach loop
+	}
+	//if the code did not exit, the log url is appended to the log text file and the rest of the code is allowed to run and update the logs
+	file_put_contents($logFile, $url . PHP_EOL, FILE_APPEND | LOCK_EX);
 }
+ 
 
 
 $team = $_POST['team'];
