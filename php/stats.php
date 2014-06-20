@@ -26,8 +26,14 @@ if (strlen($url) > 21)
 		$url = substr($url,0,21);
 }
 
+
+$sql='SELECT DATABASE()';
+$sqlresult=mysql_query($sql);
+$row=mysql_fetch_row($sqlresult);
+$active_db=$row[0];
+
 // This is the file holding the URLs of the Log files that have been uploaded
-$logFile = "../databases/urls/logURL.txt";
+$logFile = "../databases/urls/" . $active_db . ".txt";
 
 //Checks to see if a logfile has been exists on the server, if not creates one. 
 if (file_exists($logFile) == false)
