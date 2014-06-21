@@ -21,7 +21,7 @@
 
 		if($val !== TRUE)
 		{
-			$create = "CREATE TABLE `$database` (stats_name VARCHAR(255),stats_steamid VARCHAR(255),stats_class VARCHAR(255),stats_kills TINYINT(8),stats_assist TINYINT(8),stats_deaths TINYINT(8),stats_damage INT,stats_dam INT ,stats_kad DECIMAL(5,2),stats_killdeaths DECIMAL(5,2),stats_damagetaken INT,stats_hpt TINYINT(8),stats_backstab TINYINT(8),stats_hs TINYINT(8),stats_as TINYINT(8),stats_sb TINYINT(8),stats_cap TINYINT(8), stats_time DECIMAL(5,2))"; 
+			$create = "CREATE TABLE `$database` (stats_name VARCHAR(255),stats_steamid VARCHAR(255),stats_class VARCHAR(255),stats_kills INT(8),stats_assist INT(8),stats_deaths INT(8),stats_damage INT,stats_dam INT ,stats_kad DECIMAL(5,2),stats_killdeaths DECIMAL(5,2),stats_damagetaken INT,stats_hpt INT(8),stats_backstab INT(8),stats_hs INT(8),stats_as INT(8),stats_sb INT(8),stats_cap INT(8), stats_time DECIMAL(5,2))"; 
 			$check = mysql_query( $create ); 
 		}
 
