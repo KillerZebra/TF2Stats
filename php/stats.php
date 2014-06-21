@@ -12,6 +12,7 @@ include ('getClass.php');
 include ('handler.php');
 
 $url = $_POST['url'];
+$database = trim($_POST['database']);
 
 $editurl = substr($url, 0, 7); 
 if($editurl != "http://")
@@ -26,14 +27,8 @@ if (strlen($url) > 21)
 		$url = substr($url,0,21);
 }
 
-
-$sql='SELECT DATABASE()';
-$sqlresult=mysql_query($sql);
-$row=mysql_fetch_row($sqlresult);
-$active_db=$row[0];
-
 // This is the file holding the URLs of the Log files that have been uploaded
-$logFile = "../databases/urls/" . $active_db . ".txt";
+$logFile = "../databases/urls/" . $database . ".txt";
 
 //Checks to see if a logfile has been exists on the server, if not creates one. 
 if (file_exists($logFile) == false)
@@ -68,7 +63,7 @@ else {
 
 
 $team = $_POST['team'];
-$database = trim($_POST['database']);
+
 $league = $_POST['league'];
 
 
