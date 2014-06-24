@@ -3,7 +3,7 @@
 	{
 
 
-		if(array_search('Rocket Launcher', $players) || array_search('Black Box', $players))
+		if(array_search('Rocket Launcher', $players) || array_search('Black Box', $players) || array_search('Original', $players) || array_search('Direct Hit', $players))
 		{
 			return "Solider";
 		}

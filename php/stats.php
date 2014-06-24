@@ -49,7 +49,8 @@ else {
 		//The process adds two whitespaces, this chops those off to match the length of $url to ensure proper comparison 
 		$line = substr($line, 0, -2);
 		//If the log the user is attempting to enter has already been logged, user will be re-directed back to index and stats will exit
-		if ($line == $url) {
+		if ($line == $url)
+		{
 			echo "That log file already exists! <br / > Stats will not be altered. <br /> <br / > ";
 			header("Refresh: 10; url=../index.php");
 			exit;
@@ -123,7 +124,7 @@ if($league == "hl")
 	for($ii = 1; $ii <= 18; $ii++ )
 	{
 		$arraySize = count($players[$ii]);
-		$findStats = 70; 
+
 
 			//makes all arrays the size of 100 for easy input. Every table converted into a random array size, making it impossible to get data from. 
 			while($arraySize <= 102)
@@ -171,7 +172,6 @@ if($league == "hl")
 
 					while(strlen($players[$ii][$findStats]) != 2 || strlen($players[$ii][$findStats]) != 1)
 					{
-						$findStats++;
 
 						if(strlen($players[$ii][$findStats]) == 2 || strlen($players[$ii][$findStats]) == 1)
 						{
@@ -308,9 +308,11 @@ if($league == "hl")
 								mySQLentry( $time , $database , $nameString , $fullID , $class , $kills , $assists , $deaths , $damage , $damagem , $kad , $kd , $damaget, $hp , $backstabs , $headshot , $airshots , $sentries , $captures);
 								break;
 							}
+
 						}
 
-							
+						$findStats++;
+
 						
 
 
