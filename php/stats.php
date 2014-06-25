@@ -139,7 +139,7 @@ if($league == "hl")
 				$findStats = 75; 
 				if($ii == 1)
 				{
-					$j = 50;
+					$j = 5;
 					while(strlen($players[1][$j]) != 5)
 					{
 						$j++;
@@ -325,11 +325,12 @@ if($league == "hl")
 
 					
 				}	
-			
+			/*
 			if($ii == 18)
 			{
 				backupStats( $database );// directs to backup.php	
 			}
+			*/
 			
 		}
 
