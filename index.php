@@ -39,7 +39,7 @@ else if (isset($_SESSION['sess_username']))
 ?>
 
 <div id="donate-button">
-		<a href="https://www.nfoservers.com/donate.pl?force_recipient=1&recipient=chuckwagon96@gmail.com"><Span>Dontate!</Span><br> Click here to donate to help with server costs. Thanks!</a>
+		<a href="https://www.nfoservers.com/donate.pl?force_recipient=1&recipient=chuckwagon96@gmail.com"><Span>Donate!</Span><br> Click here to donate to help with server costs. Thanks!</a>
 </div>
 
 <div id="selectTable">
@@ -266,6 +266,7 @@ if (isset($_SESSION['sess_username']))
 	echo '</div>';
 }
 
+/*
 for($i=1; $i <= $linesInFile; $i++)
 {
 	$lines = file($file);
@@ -285,6 +286,7 @@ for($i=1; $i <= $linesInFile; $i++)
 	echo '<input type="submit" value="Backup">';
 	echo '</form>';
 	echo '</div>';
+	*/
 ?>
 
 
