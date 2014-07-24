@@ -66,11 +66,11 @@
 	}
 
 
-	
+	/*
 		header("Refresh: 10; url=../index.php");
 	 	echo '<h3>Returning to Table in 10 seconds</h3>';
 	 	echo '<p><a href=../index.php>Or click here</a></p>';
-	
+	*/
 
 
 
