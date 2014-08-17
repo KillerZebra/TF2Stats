@@ -45,7 +45,7 @@ else if (isset($_SESSION['sess_username']))
 <div id="selectTable">
 
 	<form name="input" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-	Select Team <select name="teams">	
+	Select Database <select name="teams">	
 
 <?php
 /**
@@ -56,17 +56,14 @@ else if (isset($_SESSION['sess_username']))
  */
 require("php/connect/connectDB.php");
 
+$file = "databases/database.txt";
+$linesInFile = count(file($file));
+//$openFile = fopen($file , 'r');
 
-$getTeams = mysql_query("SELECT team_name FROM accounts.team"); 
-$teamArr = Array();
-
-while($row = mysql_fetch_array($getTeams)) 
+for($i=0; $i < $linesInFile; $i++)
 {
-   $teamArr[] = $row['team_name'];
-}
-for($i = 0; $i < count($teamArr); $i++ )
-{
-	echo	"<option value='" . $teamArr[$i]  . "'>$teamArr[$i]</option>";
+	$lines = file($file);
+	echo	"<option value='" . $lines[$i]  . "'>$lines[$i]</option>";
 }
 echo	'</select><br />';
 echo	'<input type="submit" value="Show Stats"> ';
@@ -80,13 +77,6 @@ echo "</div>";
 
 
 		$database = trim($_POST['teams']);
-		$hostname = "localhost";
-		$username = "root";
-		$password = "";
-
-		$dbConnect = mysql_connect( $hostname , $username , $password );
-		$dbSelect  = mysql_select_db( $database , $dbConnect );
-
 		$result = mysql_query("SELECT * FROM `$database`"); 
 
 		echo "<div id=tableLabel><h3> $database </h3></div>";
@@ -244,8 +234,6 @@ for($i=1; $i <= $linesInFile; $i++)
 
 if (isset($_SESSION['sess_username']))
 {
-	$team = $_SESSION['sess_team'];
-
 	echo '<div id="stats">';
 	echo '<form name="input" action="php/stats.php" method="post">';
 	echo 'URL: <input type="text" name="url"><br />';
@@ -257,8 +245,21 @@ if (isset($_SESSION['sess_username']))
 	echo '<input type="radio" name="league" value="hl">9v9';
 	echo '<input type="radio" name="league" value="sixes">6v6<br />';
 
-	echo "<input type='hidden' name='database' value='$team'";
+	echo 'Select Database <select name="database">';
+	if ($_SESSION['sess_user_id'] == 0) //super admin, can see all databases
+	{
+		for($i=0; $i < $linesInFile; $i++)
+		{
+			echo "<option value='" . $lines[$i]  . "'>$lines[$i]</option>";
+		}
 		
+
+	}
+	else if ($_SESSION['sess_user_id'] == 1) //pretty princess database
+	{
+
+			echo "<option value='" . $lines[1]  . "'>$lines[1]</option>";
+	}
 	echo '</select><br />';
 	echo '<input type="submit" value="Submit Stats"> ';
 	echo '</form>';

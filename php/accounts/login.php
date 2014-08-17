@@ -46,8 +46,8 @@ if(isset($_POST['username']) && isset($_POST['password']))
 	//$password = hash('sha256', $_POST['password'] . $salt); 
 
 	$username = mysql_real_escape_string($username);
-	$query = "SELECT users_name, users_password, users_passsalt , users_level
-	FROM users
+	$query = "SELECT users_name, users_password, users_passsalt , users_level , users_team
+	FROM accounts.users
 	WHERE users_name = '$username';";
 	 
 	$result = mysql_query($query);
@@ -71,6 +71,7 @@ if(isset($_POST['username']) && isset($_POST['password']))
 		session_regenerate_id();
 		$_SESSION['sess_user_id'] = $userData['users_level'];
 		$_SESSION['sess_username'] = $userData['users_name'];
+		$_SESSION['sess_team'] = $userData['users_team'];
 		session_write_close();
 		header('Location: ../../index.php');
 	}

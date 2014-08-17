@@ -89,7 +89,7 @@ else if ($league == "sixes")
 	for($i=0; $i<=18; $i++)
 	{
 		$tables[$i]->plaintext . "<br />";
-		$players[$i] = preg_split( '/(-|<\/tr>|<tr>|<\/th>|<td>|<ul|<\/td>|<span class="tip" title="|<\/span>)/', $tables[$i],-1,PREG_SPLIT_NO_EMPTY); 	
+		$players[$i] = preg_split( '/(http:\/\/www.ugcleague.com\/|<td class="blu">|<td class="red">|toggle="dropdown" href="#">|<\/a>|-|<\/tr>|<tr>|<\/th>|<td>|<ul|<\/td>|<span class="tip" title="|<\/span>)/', $tables[$i],-1,PREG_SPLIT_NO_EMPTY); 	
 	}
 }
 
@@ -174,8 +174,7 @@ if($league == "hl")
 					}
 					
 					// gets player steam id
-					$steam = 10;
-						
+					$steam = 10;	
 					while($steam != 102)
 					{
 						if(strlen($players[$ii][$steam]) != 102)
@@ -184,20 +183,20 @@ if($league == "hl")
 						}
 						if(strlen($players[$ii][$steam]) >= 95 && strlen($players[$ii][$steam]) < 105)
 						{
+
 							$fullID = substr($players[$ii][$steam], 67, 18);
-							$steam = 102;
+							$pos = strpos($fullID, '"');
+							if($pos == true)
+							{
+								$fullID = substr($players[$ii][$steam], 67, $pos);
+							}
+
 						}
 					}
-					
-					if(!(is_numeric(strpos($fullID, 18))))
-					{
-						$fullID = substr($fullID, 0, 17);
-
-					}
-					$fullID = trim($fullID);
+				
 
 					$class = getClass($players[$ii]);// directs to getClass.php	
-					while($statsCount != 14)
+					while($statsCount <= 13)
 					{
 							if(is_numeric($players[$ii][$findStats]))
 							{
@@ -206,6 +205,8 @@ if($league == "hl")
 									if(in_array("Capture Point Captures\">CAP", $players[0]))
 									{
 										$captures = $players[$ii][$findStats];
+										$findStats--;
+
 									}
 									else if(!(in_array("Capture Point Captures\">CAP", $players[0])))
 									{
@@ -217,9 +218,9 @@ if($league == "hl")
 									if(in_array("Sentries built\">SB", $players[0]))
 									{
 										$sentries = $players[$ii][$findStats];
+										$findStats--;
 									}
 									else if(!(in_array("Sentries built\">SB", $players[0])))
-
 									{
 										$sentries = 0;
 									}
@@ -228,31 +229,36 @@ if($league == "hl")
 								{
 									if(in_array("AIRSHOTS\">AS", $players[0]))
 									{
-										$sentries = $players[$ii][$findStats];
+										$airshots = $players[$ii][$findStats];
+										$findStats--;
 									}
 									else if(!(in_array("AIRSHOTS\">AS", $players[0])))
 
 									{
-										$sentries = 0;
+										$airshots = 0;
 									}
 								}
 								else if($statsCount == 3)
 								{
 									$headshot = $players[$ii][$findStats];
+									$findStats--;
 								}
 								else if($statsCount == 4)
 								{
 									$backstabs = $players[$ii][$findStats];
+									$findStats--;
 								}
 								else if($statsCount == 5)
 								{
 									$hp = $players[$ii][$findStats];
+									$findStats--;
 								}
 								else if($statsCount == 6)
 								{
 									if(in_array("Damage taken\">DT", $players[0]))
 									{
 										$damaget = $players[$ii][$findStats];
+										$findStats--;
 									}
 									else if (!(in_array("Damage taken\">DT", $players[0])))
 									{
@@ -262,39 +268,46 @@ if($league == "hl")
 								else if($statsCount == 7)
 								{
 									$kd = $players[$ii][$findStats];
+									$findStats--;
 								}
 								else if($statsCount == 8)
 								{
 									$kad = $players[$ii][$findStats];
+									$findStats--;
 								}
 								else if($statsCount == 9)
 								{
 									$damagem = $players[$ii][$findStats];
+									$findStats--;
 								}
 								else if($statsCount == 10)
 								{
 									$damage = $players[$ii][$findStats];
+									$findStats--;
 								}
 								else if($statsCount == 11)
 								{
 									$deaths = $players[$ii][$findStats];
+									$findStats--;
 								}
 								else if($statsCount == 12)
 								{
 									$assists = $players[$ii][$findStats];
+									$findStats--;									
 								}
 								else if($statsCount == 13)
 								{
 									$kills = $players[$ii][$findStats];
+									$findStats--;
 								}
 								$statsCount++;
-								$findStats--;
 							}
 							else
 							{
 								$findStats--;
 							}
 						}
+						
 						/*
 						echo "<br/ >Name: $name " . "<br /> ";
 						echo "Class: $class " . "<br /> ";
@@ -316,26 +329,16 @@ if($league == "hl")
 						echo "Sentries: $sentries" . "<br /> ";
 						echo "Captures: $captures" . "<br /> ";
 						*/
-
-								
-		mySQLentry( $time , $database , $name , $fullID , $class , $kills , $assists , $deaths , $damage , $damagem , $kad , $kd , $damaget, $hp , $backstabs , $headshot , $airshots , $sentries , $captures);					
-	}
-			
+														
+						mySQLentry( $time , $database , $name , $fullID , $class , $kills , $assists , $deaths , $damage , $damagem , $kad , $kd , $damaget, $hp , $backstabs , $headshot , $airshots , $sentries , $captures);					
+					}
+			}
 				//this block prints out the values the stats are attached too. It is used for debugging (making sure all the values got assigned) and is not needed in the code. 
 }
 
 //var_dump($players);
 
 ?>
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>

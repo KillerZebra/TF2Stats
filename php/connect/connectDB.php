@@ -4,12 +4,21 @@
 	$username = "root";
 	$password = "";
 
-	$dbName = "aguaruim_tf2logs";
+	$dbName1 = "accounts";
 
 	$dbConnect = mysql_connect( $hostname , $username , $password );
-	$dbSelect  = mysql_select_db( $dbName , $dbConnect );
+	$dbSelect  = mysql_select_db( $dbName1 , $dbConnect );
 
+	/*
 
+	if (isset($_SESSION['sess_username']))
+	{
+		$team = $_SESSION['sess_team'];
+		$username = $_SESSION['sess_username'];
+		$dbConnect = mysql_connect( $hostname , $username , $password );
+		$dbSelect  = mysql_select_db( $team , $dbConnect );
+
+	}
 
 	/*if ( $dbConnect)
 		{

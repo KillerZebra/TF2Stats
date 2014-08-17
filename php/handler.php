@@ -13,9 +13,14 @@
 //This function takes all the info and adds it to the database. 
 	function mySQLentry( $time , $database , $nameString , $fullID , $class , $killsString , $assistsString , $deathsString , $damageString , $damagemString , $kadString , $kdString , $damagetString , $hpString , $backstabsString , $headshotString , $airshotString , $sentriesString , $capturesString)
 	{
-		require("connect/connectDB.php");
-		include_once('backup.php');
 
+		$hostname = "localhost";
+		$username = "root";
+		$password = "";
+
+		$dbConnect = mysql_connect( $hostname , $username , $password );
+		$dbSelect  = mysql_select_db( $database , $dbConnect );
+		include_once('backup.php');
 
 		$val = mysql_query("SELECT 1 FROM `$database`");
 
@@ -65,8 +70,8 @@
 
 	}
 
-
-	/*
+/*
+	
 		header("Refresh: 10; url=../index.php");
 	 	echo '<h3>Returning to Table in 10 seconds</h3>';
 	 	echo '<p><a href=../index.php>Or click here</a></p>';
